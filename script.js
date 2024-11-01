@@ -100,13 +100,29 @@ function renderFavorites() {
         const item = document.createElement('li');
         item.innerHTML = `
             ${favorite}
-            <button onclick="toggleFavorite('${favorite}')" class="remove-favorite"><i class="fa-solid fa-xmark"></i></button>
+            <button onclick="toggleFavorite('${favorite}')" class="remove-favorite"><i class="fa-solid fa-trash"></i></button>
         `;
         favoritesList.appendChild(item);
     });
 }
 
+function applyFilters() {
+    const query = document.getElementById('search').value.toLowerCase();
+    const selectedRegion = document.getElementById('region-filter').value;
+    const selectedLanguage = document.getElementById('language-filter').value;
 
+    const filteredCountries = countries.filter(country => {
+        const matchesSearch = country.name.common.toLowerCase().includes(query);
+        const matchesRegion = selectedRegion !== 'all' ? country.region === selectedRegion : true;
+        const matchesLanguage = selectedLanguage
+            ? country.languages && Object.values(country.languages).some(lang => lang.toLowerCase() === selectedLanguage.toLowerCase())
+            : true;
 
+        return matchesSearch && matchesRegion && matchesLanguage;
+    });
+
+    renderCountries(filteredCountries);
+    renderSuggestions(filteredCountries);
+}
 
 
