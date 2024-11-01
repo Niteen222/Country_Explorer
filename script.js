@@ -5,6 +5,8 @@ const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
 document.addEventListener('DOMContentLoaded', () => {
     fetchCountries();
     document.getElementById('search').addEventListener('input', handleSearch);
+    document.getElementById('region-filter').addEventListener('change', applyFilters);
+    document.getElementById('language-filter').addEventListener('change', applyFilters);
     renderFavorites();
 });
 
@@ -18,6 +20,29 @@ async function fetchCountries() {
     }
 }
 
+function handleSearch() {
+    applyFilters();
+}
+
+function applyFilters() {
+    const query = document.getElementById('search').value.toLowerCase();
+    const selectedRegion = document.getElementById('region-filter').value;
+    const selectedLanguage = document.getElementById('language-filter').value;
+
+    const filteredCountries = countries.filter(country => {
+        const matchesSearch = country.name.common.toLowerCase().includes(query);
+        const matchesRegion = selectedRegion ? country.region === selectedRegion : true;
+        const matchesLanguage = selectedLanguage
+            ? country.languages && Object.values(country.languages).includes(selectedLanguage)
+            : true;
+
+        return matchesSearch && matchesRegion && matchesLanguage;
+    });
+
+    renderCountries(filteredCountries);
+    renderSuggestions(filteredCountries);
+}
+
 function renderCountries(countries) {
     const countriesContainer = document.getElementById('countries');
     countriesContainer.innerHTML = '';
@@ -27,21 +52,17 @@ function renderCountries(countries) {
         card.innerHTML = `
             <img src="${country.flags.png}" alt="Flag of ${country.name.common}" width="100">
             <h3>${country.name.common}</h3>
-            <button onclick="toggleFavorite('${country.name.common}')">
-                ${favorites.includes(country.name.common) ? 'Remove from Favorites' : 'Add to Favorites'}
-            </button>
+            <div class="button-group">
+                <button class="add" onclick="toggleFavorite('${country.name.common}')">
+                    ${favorites.includes(country.name.common) ? '<i class="fa-solid fa-heart"></i>' : '<i class="fa-regular fa-heart"></i>'}
+                </button>
+                <a href="https://en.wikipedia.org/wiki/${encodeURIComponent(country.name.common)}" target="_blank" class="learn-more">
+                    Show More
+                </a>
+            </div>
         `;
         countriesContainer.appendChild(card);
     });
-}
-
-function handleSearch() {
-    const query = document.getElementById('search').value.toLowerCase();
-    const filteredCountries = countries.filter(country =>
-        country.name.common.toLowerCase().includes(query)
-    );
-    renderCountries(filteredCountries);
-    renderSuggestions(filteredCountries);
 }
 
 function renderSuggestions(countries) {
@@ -77,63 +98,15 @@ function renderFavorites() {
     favoritesList.innerHTML = '';
     favorites.forEach(favorite => {
         const item = document.createElement('li');
-        item.textContent = favorite;
+        item.innerHTML = `
+            ${favorite}
+            <button onclick="toggleFavorite('${favorite}')" class="remove-favorite"><i class="fa-solid fa-xmark"></i></button>
+        `;
         favoritesList.appendChild(item);
     });
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-    const searchInput = document.getElementById("search");
-    const suggestionsBox = document.getElementById("suggestions");
 
-    searchInput.addEventListener("input", () => {
-        const query = searchInput.value.trim();
-
-        if (query.length > 0) {
-            showSuggestions(query);
-        } else {
-            suggestionsBox.innerHTML = "";
-            suggestionsBox.style.display = "none";
-        }
-    });
-
-    function showSuggestions(query) {
-        suggestionsBox.style.display = "block";
-        suggestionsBox.innerHTML = `
-            <div class="suggestion-item">${query}</div>
-        `;
-
-        document.querySelectorAll(".suggestion-item").forEach(item => {
-            item.addEventListener("click", () => {
-                searchInput.value = item.textContent;
-                suggestionsBox.style.display = "none";
-            });
-        });
-    }
-});
-
-
-function renderCountries(countries) {
-    const countriesContainer = document.getElementById('countries');
-    countriesContainer.innerHTML = '';
-    countries.forEach(country => {
-        const card = document.createElement('div');
-        card.classList.add('country-card');
-        card.innerHTML = `
-            <img src="${country.flags.png}" alt="Flag of ${country.name.common}">
-            <h3>${country.name.common}</h3>
-            <div class="button-group">
-                <button class="add" onclick="toggleFavorite('${country.name.common}')">
-                    ${favorites.includes(country.name.common) ? 'Remove from Favorites' : 'Add to Favorites'}
-                </button>
-                <a href="https://en.wikipedia.org/wiki/${encodeURIComponent(country.name.common)}" target="_blank" class="learn-more">
-                    Read More
-                </a>
-            </div>
-        `;
-        countriesContainer.appendChild(card);
-    });
-}
 
 
 

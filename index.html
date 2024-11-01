@@ -6,13 +6,167 @@
     <title>Country Explorer</title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="/favicon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 </head>
 <body>
     <header>
-        <h1>Country Explorer Cunsult App</h1>
+        <h1>Country Explorer</h1>
+        <select id="region-filter">
+            <option value="all">All Regions</option>
+            <option value="Africa">Africa</option>
+            <option value="Americas">Americas</option>
+            <option value="Asia">Asia</option>
+            <option value="Europe">Europe</option>
+            <option value="Oceania">Oceania</option>
+            <option value="Middle East">Middle East</option>
+            <option value="North America">North America</option>
+            <option value="South America">South America</option>
+            <option value="Central America">Central America</option>
+            <option value="Caribbean">Caribbean</option>
+            <option value="Western Africa">Western Africa</option>
+            <option value="Eastern Africa">Eastern Africa</option>
+            <option value="Northern Africa">Northern Africa</option>
+            <option value="Southern Africa">Southern Africa</option>
+            <option value="Central Africa">Central Africa</option>
+            <option value="Western Europe">Western Europe</option>
+            <option value="Eastern Europe">Eastern Europe</option>
+            <option value="Northern Europe">Northern Europe</option>
+            <option value="Southern Europe">Southern Europe</option>
+            <option value="Central Europe">Central Europe</option>
+            <option value="East Asia">East Asia</option>
+            <option value="South Asia">South Asia</option>
+            <option value="Southeast Asia">Southeast Asia</option>
+            <option value="Central Asia">Central Asia</option>
+            <option value="Sub-Saharan Africa">Sub-Saharan Africa</option>
+            <option value="Polynesia">Polynesia</option>
+            <option value="Micronesia">Micronesia</option>
+            <option value="Melanesia">Melanesia</option>
+            <option value="Arctic">Arctic</option>
+            <option value="Antarctica">Antarctica</option>
+            <option value="Baltic States">Baltic States</option>
+            <option value="Scandinavia">Scandinavia</option>
+            <option value="Nordic Countries">Nordic Countries</option>
+            <option value="Iberian Peninsula">Iberian Peninsula</option>
+            <option value="Balkans">Balkans</option>
+            <option value="Caucasus">Caucasus</option>
+            <option value="Gulf States">Gulf States</option>
+            <option value="Levant">Levant</option>
+            <option value="Maghreb">Maghreb</option>
+            <option value="Horn of Africa">Horn of Africa</option>
+            <option value="Sahara Desert Region">Sahara Desert Region</option>
+            <option value="Great Lakes Region">Great Lakes Region</option>
+            <option value="Amazon Basin">Amazon Basin</option>
+            <option value="Andean Region">Andean Region</option>
+            <option value="Patagonia">Patagonia</option>
+            <option value="West Indies">West Indies</option>
+            <option value="British Isles">British Isles</option>
+            <option value="Apennine Peninsula">Apennine Peninsula</option>
+            <option value="Black Sea Region">Black Sea Region</option>
+            <option value="Caspian Region">Caspian Region</option>
+            <option value="Red Sea Region">Red Sea Region</option>
+            <option value="Great Rift Valley">Great Rift Valley</option>
+            <option value="Ganges Basin">Ganges Basin</option>
+            <option value="Mekong Region">Mekong Region</option>
+            <option value="Indochina Peninsula">Indochina Peninsula</option>
+            <option value="Malay Archipelago">Malay Archipelago</option>
+            <option value="Himalayan Region">Himalayan Region</option>
+            <option value="Tibetan Plateau">Tibetan Plateau</option>
+            <option value="Silk Road Region">Silk Road Region</option>
+            <option value="Fertile Crescent">Fertile Crescent</option>
+            <option value="Mediterranean Region">Mediterranean Region</option>
+            <option value="Siberia">Siberia</option>
+            <option value="Lapland">Lapland</option>
+            <option value="Sahel">Sahel</option>
+            <option value="Southern Cone">Southern Cone</option>
+            <option value="Territory of Guiana">Territory of Guiana</option>
+            <option value="Highlands">Highlands</option>
+            <option value="Rocky Mountains">Rocky Mountains</option>
+            <option value="Great Plains">Great Plains</option>
+            <option value="Appalachian Region">Appalachian Region</option>
+            <option value="Ural Mountains">Ural Mountains</option>
+            <option value="Congo Basin">Congo Basin</option>
+            <option value="Kalahari Desert">Kalahari Desert</option>
+            <option value="West Africa">West Africa</option>
+            <option value="East Africa">East Africa</option>
+            <option value="North Africa">North Africa</option>
+            <option value="Southwest Asia">Southwest Asia</option>
+        </select>
+        
+        <select id="language-filter">
+            <option value="">Select Language</option>
+            <option value="English">English</option>
+            <option value="Spanish">Spanish</option>
+            <option value="French">French</option>
+            <option value="Chinese">Chinese</option>
+            <option value="Arabic">Arabic</option>
+            <option value="Portuguese">Portuguese</option>
+            <option value="Russian">Russian</option>
+            <option value="Japanese">Japanese</option>
+            <option value="German">German</option>
+            <option value="Korean">Korean</option>
+            <option value="Italian">Italian</option>
+            <option value="Hindi">Hindi</option>
+            <option value="Bengali">Bengali</option>
+            <option value="Punjabi">Punjabi</option>
+            <option value="Urdu">Urdu</option>
+            <option value="Vietnamese">Vietnamese</option>
+            <option value="Turkish">Turkish</option>
+            <option value="Persian">Persian</option>
+            <option value="Swahili">Swahili</option>
+            <option value="Tamil">Tamil</option>
+            <option value="Telugu">Telugu</option>
+            <option value="Marathi">Marathi</option>
+            <option value="Gujarati">Gujarati</option>
+            <option value="Polish">Polish</option>
+            <option value="Ukrainian">Ukrainian</option>
+            <option value="Malay">Malay</option>
+            <option value="Dutch">Dutch</option>
+            <option value="Greek">Greek</option>
+            <option value="Czech">Czech</option>
+            <option value="Romanian">Romanian</option>
+            <option value="Hungarian">Hungarian</option>
+            <option value="Swedish">Swedish</option>
+            <option value="Finnish">Finnish</option>
+            <option value="Danish">Danish</option>
+            <option value="Norwegian">Norwegian</option>
+            <option value="Thai">Thai</option>
+            <option value="Hebrew">Hebrew</option>
+            <option value="Bulgarian">Bulgarian</option>
+            <option value="Serbian">Serbian</option>
+            <option value="Croatian">Croatian</option>
+            <option value="Slovak">Slovak</option>
+            <option value="Bosnian">Bosnian</option>
+            <option value="Afrikaans">Afrikaans</option>
+            <option value="Amharic">Amharic</option>
+            <option value="Filipino">Filipino</option>
+            <option value="Burmese">Burmese</option>
+            <option value="Khmer">Khmer</option>
+            <option value="Lao">Lao</option>
+            <option value="Nepali">Nepali</option>
+            <option value="Sinhala">Sinhala</option>
+            <option value="Pashto">Pashto</option>
+            <option value="Azerbaijani">Azerbaijani</option>
+            <option value="Albanian">Albanian</option>
+            <option value="Armenian">Armenian</option>
+            <option value="Georgian">Georgian</option>
+            <option value="Mongolian">Mongolian</option>
+            <option value="Zulu">Zulu</option>
+            <option value="Xhosa">Xhosa</option>
+            <option value="Hausa">Hausa</option>
+            <option value="Yoruba">Yoruba</option>
+            <option value="Igbo">Igbo</option>
+            <option value="Tigrinya">Tigrinya</option>
+            <option value="Somali">Somali</option>
+            <option value="Maori">Maori</option>
+            <option value="Samoan">Samoan</option>
+            <option value="Tongan">Tongan</option>
+            <option value="Fijian">Fijian</option>
+        </select>
+        
         <input type="text" id="search" placeholder="Search Your Country Here" aria-label="Search for a country">
         <div id="suggestions" class="suggestions"></div>
     </header>
+    
     <main>
         <section id="countries" class="countries"></section>
         <aside id="favorites" class="favorites">
